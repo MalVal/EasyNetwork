@@ -8,8 +8,8 @@ import java.net.Socket;
 
 public class ClientSocket implements SocketInterface {
     private final Socket cliSock;
-    private final ObjectInputStream ois;
     private final ObjectOutputStream oos;
+    private final ObjectInputStream ois;
 
     public ClientSocket(String host, Integer port) {
         try {
