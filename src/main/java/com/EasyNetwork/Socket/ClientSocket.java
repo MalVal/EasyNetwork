@@ -2,6 +2,7 @@ package com.EasyNetwork.Socket;
 
 import com.EasyNetwork.Exception.SocketException;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -42,5 +43,10 @@ public class ClientSocket implements SocketInterface {
     @Override
     public ObjectOutputStream getObjectOutputStream() {
         return this.oos;
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.cliSock.close();
     }
 }

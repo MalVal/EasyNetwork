@@ -27,4 +27,9 @@ public class SocketServer implements SocketServerInterface {
     public SocketInterface acceptConnection() throws IOException {
         return new ClientSocket(this.serverSocket.accept());
     }
+
+    @Override
+    public void close() throws IOException {
+        this.serverSocket.close();
+    }
 }

@@ -6,4 +6,5 @@ import java.net.SocketException;
 public interface SocketServerInterface {
     void setTimout(int milliseconds) throws SocketException;
     SocketInterface acceptConnection() throws IOException;
+    void close() throws IOException;
 }

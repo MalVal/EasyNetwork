@@ -3,6 +3,7 @@ package com.EasyNetwork.Socket;
 import com.EasyNetwork.Exception.SocketException;
 
 import javax.net.ssl.*;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -56,5 +57,10 @@ public class ClientSocketSecure implements SocketInterface {
     @Override
     public ObjectOutputStream getObjectOutputStream() {
         return this.oos;
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.sslSocket.close();
     }
 }

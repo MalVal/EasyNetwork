@@ -7,4 +7,5 @@ import java.io.ObjectOutputStream;
 public interface SocketInterface {
     ObjectInputStream getObjectInputStream() throws IOException;
     ObjectOutputStream getObjectOutputStream() throws IOException;
+    void close() throws IOException;
 }

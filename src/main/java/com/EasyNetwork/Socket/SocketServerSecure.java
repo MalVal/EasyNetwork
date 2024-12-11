@@ -40,4 +40,9 @@ public class SocketServerSecure implements SocketServerInterface {
     public SocketInterface acceptConnection() throws IOException {
         return new ClientSocketSecure((SSLSocket)this.serverSocket.accept());
     }
+
+    @Override
+    public void close() throws IOException {
+        this.serverSocket.close();
+    }
 }
