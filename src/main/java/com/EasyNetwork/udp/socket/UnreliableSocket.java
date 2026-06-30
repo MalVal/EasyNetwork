@@ -2,16 +2,15 @@ package com.EasyNetwork.udp.socket;
 
 import com.EasyNetwork.exception.SocketException;
 
-import java.io.*;
 import java.net.*;
 
-public class ClientUnreliableSocket implements UnreliableSocketInterface {
+public class UnreliableSocket implements UnreliableSocketInterface {
 
     private final DatagramSocket socket;
     private final InetAddress address;
     private final int port;
 
-    public ClientUnreliableSocket(String host, Integer port) {
+    public UnreliableSocket(String host, Integer port) {
         try {
             this.socket = new DatagramSocket();
             this.address = InetAddress.getByName(host);
