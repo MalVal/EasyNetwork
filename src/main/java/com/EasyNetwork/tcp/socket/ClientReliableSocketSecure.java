@@ -1,6 +1,6 @@
-package com.EasyNetwork.Socket;
+package com.EasyNetwork.tcp.socket;
 
-import com.EasyNetwork.Exception.SocketException;
+import com.EasyNetwork.exception.SocketException;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -9,13 +9,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.security.*;
 
-public class ClientSocketSecure implements SocketInterface {
+public class ClientReliableSocketSecure implements ReliableSocketInterface {
 
-    private Socket sslSocket;
+    private final Socket sslSocket;
     private final ObjectOutputStream oos;
     private final ObjectInputStream ois;
 
-    public ClientSocketSecure(SSLSocket sslSocket) {
+    public ClientReliableSocketSecure(SSLSocket sslSocket) {
         try {
             this.sslSocket = sslSocket;
             this.oos = new ObjectOutputStream(sslSocket.getOutputStream());
@@ -26,7 +26,7 @@ public class ClientSocketSecure implements SocketInterface {
         }
     }
 
-    public ClientSocketSecure(String host, Integer port, KeyStore keyStore, String ksPassword) throws SocketException {
+    public ClientReliableSocketSecure(String host, Integer port, KeyStore keyStore, String ksPassword) throws SocketException {
         try {
             SSLContext sslContext = SSLContext.getInstance("TLSv1.3");
 

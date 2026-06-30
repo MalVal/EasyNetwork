@@ -1,4 +1,4 @@
-package com.EasyNetwork.Response;
+package com.EasyNetwork.response;
 
 import java.io.Serializable;
 

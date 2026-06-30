@@ -1,20 +1,20 @@
-package com.EasyNetwork.Service;
+package com.EasyNetwork.tcp.service;
 
-import com.EasyNetwork.Exception.CommunicationException;
-import com.EasyNetwork.Request.Request;
-import com.EasyNetwork.Response.Response;
-import com.EasyNetwork.Socket.SocketInterface;
+import com.EasyNetwork.exception.CommunicationException;
+import com.EasyNetwork.request.Request;
+import com.EasyNetwork.response.Response;
+import com.EasyNetwork.tcp.socket.ReliableSocketInterface;
 
 import java.io.IOException;
 
-public class RequestService {
-    private SocketInterface si;
+public class ReliableRequestService {
+    private ReliableSocketInterface si;
 
-    public RequestService(SocketInterface si) {
+    public ReliableRequestService(ReliableSocketInterface si) {
         this.si = si;
     }
 
-    public void setSocket(SocketInterface si) {
+    public void setSocket(ReliableSocketInterface si) {
         this.si = si;
     }
 

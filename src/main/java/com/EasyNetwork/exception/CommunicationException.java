@@ -1,4 +1,4 @@
-package com.EasyNetwork.Exception;
+package com.EasyNetwork.exception;
 
 public class CommunicationException extends RuntimeException {
     public CommunicationException() {

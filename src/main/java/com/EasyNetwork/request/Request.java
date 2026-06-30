@@ -1,4 +1,4 @@
-package com.EasyNetwork.Request;
+package com.EasyNetwork.request;
 
 import java.io.Serializable;
 

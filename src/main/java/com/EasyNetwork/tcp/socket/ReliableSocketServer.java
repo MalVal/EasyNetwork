@@ -1,15 +1,15 @@
-package com.EasyNetwork.Socket;
+package com.EasyNetwork.tcp.socket;
 
-import com.EasyNetwork.Exception.SocketException;
+import com.EasyNetwork.exception.SocketException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class SocketServer implements SocketServerInterface {
+public class ReliableSocketServer implements ReliableSocketServerInterface {
 
     private final ServerSocket serverSocket;
 
-    public SocketServer(Integer port) {
+    public ReliableSocketServer(Integer port) {
         try {
             this.serverSocket = new ServerSocket(port);
         }
@@ -19,13 +19,13 @@ public class SocketServer implements SocketServerInterface {
     }
 
     @Override
-    public void setTimout(int milliseconds) throws java.net.SocketException {
+    public void setTimeout(int milliseconds) throws java.net.SocketException {
         this.serverSocket.setSoTimeout(milliseconds);
     }
 
     @Override
-    public SocketInterface acceptConnection() throws IOException {
-        return new ClientSocket(this.serverSocket.accept());
+    public ReliableSocketInterface acceptConnection() throws IOException {
+        return new ClientReliableSocket(this.serverSocket.accept());
     }
 
     @Override

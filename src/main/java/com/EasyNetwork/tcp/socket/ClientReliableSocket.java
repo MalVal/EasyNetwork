@@ -1,6 +1,6 @@
-package com.EasyNetwork.Socket;
+package com.EasyNetwork.tcp.socket;
 
-import com.EasyNetwork.Exception.SocketException;
+import com.EasyNetwork.exception.SocketException;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,12 +8,12 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ClientSocket implements SocketInterface {
+public class ClientReliableSocket implements ReliableSocketInterface {
     private final Socket cliSock;
     private final ObjectOutputStream oos;
     private final ObjectInputStream ois;
 
-    public ClientSocket(Socket socket) {
+    public ClientReliableSocket(Socket socket) {
         try {
             this.cliSock = socket;
             this.oos = new ObjectOutputStream(cliSock.getOutputStream());
@@ -24,7 +24,7 @@ public class ClientSocket implements SocketInterface {
         }
     }
 
-    public ClientSocket(String host, Integer port) {
+    public ClientReliableSocket(String host, Integer port) {
         try {
             this.cliSock = new Socket(InetAddress.getByName(host), port);
             this.oos = new ObjectOutputStream(cliSock.getOutputStream());
