@@ -7,13 +7,13 @@ import java.net.*;
 public class UnreliableSocket implements UnreliableSocketInterface {
     private final DatagramSocket socket;
     private final InetAddress address;
-    private final int port;
+    private final int dPort;
 
-    public UnreliableSocket(String host, Integer port) {
+    public UnreliableSocket(String host, Integer sPort, Integer dPort) {
         try {
-            this.socket = new DatagramSocket();
+            this.socket = new DatagramSocket(sPort);
             this.address = InetAddress.getByName(host);
-            this.port = port;
+            this.dPort = dPort;
         }
         catch (Exception e) {
             throw new SocketException(e.getMessage());
@@ -31,8 +31,8 @@ public class UnreliableSocket implements UnreliableSocketInterface {
     }
 
     @Override
-    public Integer getPort() {
-        return this.port;
+    public Integer getDestinationPort() {
+        return this.dPort;
     }
 
     @Override

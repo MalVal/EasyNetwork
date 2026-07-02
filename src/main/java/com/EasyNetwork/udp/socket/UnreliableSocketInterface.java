@@ -7,6 +7,6 @@ import java.net.InetAddress;
 public interface UnreliableSocketInterface {
     DatagramSocket getSocket();
     InetAddress getAddress();
-    Integer getPort();
+    Integer getDestinationPort();
     void close() throws IOException;
 }

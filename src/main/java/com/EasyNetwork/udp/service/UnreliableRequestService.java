@@ -25,7 +25,7 @@ public class UnreliableRequestService {
                     data,
                     data.length,
                     this.si.getAddress(),
-                    this.si.getPort()
+                    this.si.getDestinationPort()
             );
             this.si.getSocket().send(packet);
         }
@@ -41,9 +41,21 @@ public class UnreliableRequestService {
                     data,
                     data.length,
                     this.si.getAddress(),
-                    this.si.getPort()
+                    this.si.getDestinationPort()
             );
             this.si.getSocket().send(packet);
+        }
+        catch (Exception e) {
+            throw new SocketException(e.getMessage());
+        }
+    }
+
+    public byte[] receiveBytes() {
+        try {
+            byte[] buffer = new byte[65535]; // Max size UDP safe
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            this.si.getSocket().receive(packet);
+            return packet.getData();
         }
         catch (Exception e) {
             throw new SocketException(e.getMessage());
