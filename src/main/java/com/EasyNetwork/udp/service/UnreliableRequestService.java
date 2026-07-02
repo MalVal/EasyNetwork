@@ -5,21 +5,18 @@ import com.EasyNetwork.udp.socket.UnreliableSocketInterface;
 
 import java.io.*;
 import java.net.DatagramPacket;
+import java.util.Arrays;
 
 import com.EasyNetwork.helper.SerializationHelper;
 
 public class UnreliableRequestService {
-    private UnreliableSocketInterface si;
+    private final UnreliableSocketInterface si;
 
     public UnreliableRequestService(UnreliableSocketInterface si) {
         this.si = si;
     }
 
-    public void setSocket(UnreliableSocketInterface si) {
-        this.si = si;
-    }
-
-    public void sendBytes(byte[] data) throws IOException {
+    public void sendBytes(byte[] data) {
         try {
             DatagramPacket packet = new DatagramPacket(
                     data,
@@ -50,12 +47,12 @@ public class UnreliableRequestService {
         }
     }
 
-    public byte[] receiveBytes() {
+    public byte[] receiveBytes(int size) {
         try {
-            byte[] buffer = new byte[65535]; // Max size UDP safe
+            byte[] buffer = new byte[size];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
             this.si.getSocket().receive(packet);
-            return packet.getData();
+            return Arrays.copyOf(packet.getData(), packet.getLength());
         }
         catch (Exception e) {
             throw new SocketException(e.getMessage());
