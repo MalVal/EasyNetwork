@@ -18,6 +18,22 @@ public class ReliableRequestService {
         this.si = si;
     }
 
+    public Response sendBytes(Byte[] b) throws CommunicationException {
+        try {
+            if (si == null || si.getObjectOutputStream() == null || si.getObjectInputStream() == null) {
+                throw new CommunicationException("SocketInterface is not properly initialized");
+            }
+            si.getObjectOutputStream().write(b);
+            return (Response) si.getObjectInputStream().readObject();
+        }
+        catch(ClassNotFoundException e) {
+            throw new CommunicationException("Unknown response received", e);
+        }
+        catch (IOException e) {
+            throw new CommunicationException("Communication error: " + e.getMessage(), e);
+        }
+    }
+
     public Response sendObject(Request r) throws CommunicationException {
         try {
             if (si == null || si.getObjectOutputStream() == null || si.getObjectInputStream() == null) {

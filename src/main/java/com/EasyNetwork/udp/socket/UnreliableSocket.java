@@ -5,7 +5,6 @@ import com.EasyNetwork.exception.SocketException;
 import java.net.*;
 
 public class UnreliableSocket implements UnreliableSocketInterface {
-
     private final DatagramSocket socket;
     private final InetAddress address;
     private final int port;

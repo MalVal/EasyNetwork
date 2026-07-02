@@ -19,6 +19,21 @@ public class UnreliableRequestService {
         this.si = si;
     }
 
+    public void sendBytes(byte[] data) throws IOException {
+        try {
+            DatagramPacket packet = new DatagramPacket(
+                    data,
+                    data.length,
+                    this.si.getAddress(),
+                    this.si.getPort()
+            );
+            this.si.getSocket().send(packet);
+        }
+        catch (Exception e) {
+            throw new SocketException(e.getMessage());
+        }
+    }
+
     public void sendObject(Object obj) {
         try {
             byte[] data = SerializationHelper.serialize(obj);

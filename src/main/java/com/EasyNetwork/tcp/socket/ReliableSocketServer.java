@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class ReliableSocketServer implements ReliableSocketServerInterface {
-
     private final ServerSocket serverSocket;
 
     public ReliableSocketServer(Integer port) {

@@ -5,8 +5,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 public interface UnreliableSocketInterface {
-    public DatagramSocket getSocket();
-    public InetAddress getAddress();
-    public Integer getPort();
+    DatagramSocket getSocket();
+    InetAddress getAddress();
+    Integer getPort();
     void close() throws IOException;
 }

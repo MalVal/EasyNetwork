@@ -3,21 +3,22 @@ package com.EasyNetwork.tcp.socket;
 import com.EasyNetwork.exception.SocketException;
 
 import javax.net.ssl.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.security.*;
 
 public class ClientReliableSocketSecure implements ReliableSocketInterface {
-
     private final Socket sslSocket;
+    private final OutputStream os;
+    private final InputStream is;
     private final ObjectOutputStream oos;
     private final ObjectInputStream ois;
 
     public ClientReliableSocketSecure(SSLSocket sslSocket) {
         try {
             this.sslSocket = sslSocket;
+            this.os = sslSocket.getOutputStream();
+            this.is = sslSocket.getInputStream();
             this.oos = new ObjectOutputStream(sslSocket.getOutputStream());
             this.ois = new ObjectInputStream(sslSocket.getInputStream());
         }
@@ -41,6 +42,8 @@ public class ClientReliableSocketSecure implements ReliableSocketInterface {
             SSLSocketFactory sslSocketFactory= sslContext.getSocketFactory();
             this.sslSocket = sslSocketFactory.createSocket(host, port);
 
+            this.os = sslSocket.getOutputStream();
+            this.is = sslSocket.getInputStream();
             this.oos = new ObjectOutputStream(sslSocket.getOutputStream());
             this.ois = new ObjectInputStream(sslSocket.getInputStream());
         }
@@ -48,6 +51,12 @@ public class ClientReliableSocketSecure implements ReliableSocketInterface {
             throw new SocketException(e.getMessage());
         }
     }
+
+    @Override
+    public InputStream getInputStream() {return this.is;}
+
+    @Override
+    public OutputStream getOutputStream() {return this.os;}
 
     @Override
     public ObjectInputStream getObjectInputStream() {
@@ -60,7 +69,5 @@ public class ClientReliableSocketSecure implements ReliableSocketInterface {
     }
 
     @Override
-    public void close() throws IOException {
-        this.sslSocket.close();
-    }
+    public void close() throws IOException {this.sslSocket.close();}
 }
